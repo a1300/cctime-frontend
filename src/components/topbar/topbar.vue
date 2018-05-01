@@ -10,7 +10,7 @@
           <a href="http://mainnet.asch.io/#/login" target="_blank" class="loginbtn btn" v-show="!this.isLogin">注册</a>
           <span class="logoutbtn btn" @click="logout" v-show="this.isLogin">注销</span>
           <router-link to="/account" class="accountbtn btn" v-show="this.isLogin">我的账户</router-link>
-          <span class="submitbtn btn"@click="showPublish" v-show="this.isLogin">发布</span>
+          <span class="submitbtn btn" @click="showPublish" v-show="this.isLogin">发布</span>
         </div>
       </nav>
     </header>

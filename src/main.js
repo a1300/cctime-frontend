@@ -5,6 +5,9 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import store from './vuex/store'
+import i18n from './i18n'
+
+console.log(i18n)
 
 Vue.config.productionTip = false
 
