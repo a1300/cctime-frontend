@@ -13,4 +13,5 @@ npm
 ```
 
 ## TODO:
-use `https://github.com/Haixing-Hu/vue-i18n`
+* use `https://github.com/Haixing-Hu/vue-i18n`
+* in `action.js` change the possibility to add another dapp-id

@@ -1,5 +1,6 @@
 const lang = {
-  lang: 'zh'
+  lang: 'zh',
+  TEST: 'HELLO'
 }
 
 export default lang
