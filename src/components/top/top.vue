@@ -20,7 +20,7 @@
       }
     },
     methods: {
-      // 刷新（重新拉取）事件
+      // 刷新（重新拉取）事件 / Refresh (re-pull) the event
       toReFresh: function (data) {
         let that = this
         setTimeout(function () {
@@ -32,14 +32,14 @@
           })
         }, 10000)
       },
-      // 实时修改对象片段
+      // 实时修改对象片段 / Modify object clips in real time
       shiftPiece: function (obj) {
         let newObj = {}
         newObj = obj
         newObj.isSelected = !newObj.isSelected
         return newObj
       },
-      // 动画开关
+      // 动画开关 / Animation switch
       toggleAward: function (index, item) {
         this.switchGroup.splice(index, 1, this.shiftPiece(item))
       }
@@ -48,7 +48,7 @@
       topArticleList: 'topArticleList'
     }),
     created: function () {
-      // 输出$state list内容
+      // 输出$state list内容 / Output $state list content
       this.$store.dispatch('getAllarticles', {
         sortBy: undefined,
         limit: '',

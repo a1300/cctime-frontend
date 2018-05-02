@@ -46,7 +46,33 @@ const lang = {
   AMOUNT_MUST_BE_GREATER_THEN_ZERO: 'The transaction amount must be greater then zero!',
   ADDRESS_NOT_IN_RIGHT_FORMAT: 'The entered address is not in the right format!',
   SUCCESS: 'Success!',
-  TRANSFER_SUCCESSFUL_MSG: 'Transfers are successful and transfer time may be slightly longer depending on the circumstances'
+  TRANSFER_SUCCESSFUL_MSG: 'Transfers are successful and transfer time may be slightly longer depending on the circumstances',
+
+  /* top.vue
+   no translations
+  */
+
+  /* toList.vue */
+  COMMENT: 'comment',
+  ENTER_REWARD_AMOUNT: 'Please enter the reward amount',
+  CONFIRM: '确认',
+  TICKET: '票',
+  REPORT_ARTICLE: '举报该文章',
+  CAN_REWARD_FEATURE_ONLY_WHEN_LOGGED_IN: '仅当您登录后才能使用打赏功能',
+  REWARD: '打赏',
+  ENTER_NUMBER_OF_TICKETS: 'Please enter the number of tickets',
+  REPORT_ARTICLE_ONLY_WHEN_LOGGED_IN: 'You can only report articles if you logged in',
+  CAVEAT: '警告',
+  IS_THIS_ARTICLE_REPORTED: 'Is this article reported?',
+  REPORT: 'Report',
+  REWARD_SUCCESS_MSG: 'The reward was succcessful. About ten seconds later you will see the updated information.',
+  REPORT_ARTICLE_CONFIRMATION_MSG: 'Article successfully reported. Please wait for the admin to verify the article.',
+  SECONDS_AGO: 'seconds ago',
+  MINUTES_AGO: 'minutes ago',
+  HOURS_AGO: '小时前',
+  DAYS_AGO: 'days ago',
+  YEARS_AGO: 'YEARS AGO',
+  JUST: 'just'
 
 }
 

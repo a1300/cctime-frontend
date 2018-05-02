@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="/static/img/logo.png"></img>
+    <img src="/static/img/logo.png">
     <h1>您访问的页面由于各种原因，总之消失了</h1>
     <router-link to="/top">点击这里返回主页，感谢您对CCTime的大力支持！</router-link>
   </div>

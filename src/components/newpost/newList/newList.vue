@@ -14,20 +14,20 @@
         <br/>
         <span class="meta">
         <span class="author meta_info">
-            <img :src="'data:image/png;base64,' + item.photo"></img>
+            <img :src="'data:image/png;base64,' + item.photo">
             <span to="user/" v-if="this.item.nickname !== undefined" :title='item.nickname'>{{item.nickname}}</span>
             <span to="user/" v-if="this.item.nickname === undefined" :title='item.authorId'>{{item.authorId}}</span>
         </span>
         <span class="timestamp meta_info">
-            <img src="/static/img/time.png"></img>
+            <img src="/static/img/time.png">
             {{this.realT}}
         </span>
         <span class="comment meta_info">
-            <img src="/static/img/comments.png"></img>
+            <img src="/static/img/comments.png">
             <router-link :to="'articles/'+item.id">{{item.comments}} 评论</router-link>
         </span>
         <span class="vote meta_info" @click="voteBtn">
-            <img src="/static/img/up.png"></img>
+            <img src="/static/img/up.png">
             {{item.votes}}票
         </span>
         </span>

@@ -11,19 +11,19 @@
           <br/>
           <span class="meta">
             <span class="author meta_info">
-              <img :src="'data:image/png;base64,' + this.articleDetail.article.photo"></img>
+              <img :src="'data:image/png;base64,' + this.articleDetail.article.photo">
               <span to="#" v-if="this.articleDetail.article.nickname !== undefined">{{this.articleDetail.article.nickname}}</span>
               <span to="#" v-if="this.articleDetail.article.nickname === undefined">{{this.articleDetail.article.authorId}}</span>
             </span>
             <span class="timestamp meta_info">
-              <img src="/static/img/time.png"></img>
+              <img src="/static/img/time.png">
               {{this.realT}}
             </span>&nbsp;&nbsp;
             <span class="comment meta_info">
-              <a to="#" @click="jumpToCom"><img src="/static/img/comments.png"></img>{{this.articleDetail.article.comments}}</a>&nbsp;&nbsp;
+              <a to="#" @click="jumpToCom"><img src="/static/img/comments.png">{{this.articleDetail.article.comments}}</a>&nbsp;&nbsp;
             </span>
             <span class="vote meta_info" v-on:click.stop.capture="voteBtn">
-              <img src="/static/img/up.png"></img>
+              <img src="/static/img/up.png">
               {{this.articleDetail.article.votes}}
             </span>
           </span>

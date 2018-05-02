@@ -1,7 +1,7 @@
 <template>
   <li class="comment_list">
     <div class="user_id">
-      <img :src="'data:image/png;base64,' + item.photo"></img>{{item.nickname || item.authorId}}
+      <img :src="'data:image/png;base64,' + item.photo">{{item.nickname || item.authorId}}
       <span class="reply_msg" v-if="!!item.replyAuthorName">回复&nbsp;&nbsp;&nbsp;&nbsp;{{item.replyAuthorName}}</span>
       <span class="reply_msg" v-else-if="!!item.replyAuthorId">回复&nbsp;&nbsp;&nbsp;&nbsp;{{item.replyAuthorId}}</span>
       <span class="reply_time">{{this.realT}}</span>

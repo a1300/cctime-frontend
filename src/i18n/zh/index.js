@@ -47,7 +47,33 @@ const lang = {
   AMOUNT_MUST_BE_GREATER_THEN_ZERO: '请确认交易数额大于零！',
   ADDRESS_NOT_IN_RIGHT_FORMAT: '您输入的地址不符合阿希规范',
   SUCCESS: '成功！',
-  TRANSFER_SUCCESSFUL_MSG: '转账成功，根据环境原因转账时间可能会略有延长'
+  TRANSFER_SUCCESSFUL_MSG: '转账成功，根据环境原因转账时间可能会略有延长',
+
+  /* top.vue
+   no translations
+  */
+
+  /* toList.vue */
+  COMMENT: '评论',
+  ENTER_REWARD_AMOUNT: '输入奖赏金额',
+  CONFIRM: '确认',
+  TICKET: '票',
+  REPORT_ARTICLE: '举报该文章',
+  CAN_REWARD_FEATURE_ONLY_WHEN_LOGGED_IN: '仅当您登录后才能使用打赏功能',
+  REWARD: '打赏',
+  ENTER_NUMBER_OF_TICKETS: '请输入打赏票数',
+  REPORT_ARTICLE_ONLY_WHEN_LOGGED_IN: '仅当您登录后才能使用举报功能',
+  CAVEAT: '警告',
+  IS_THIS_ARTICLE_REPORTED: '是否对该文章进行举报？',
+  REPORT: '举报',
+  REWARD_SUCCESS_MSG: '打赏成功！大约十秒后将看到更新信息',
+  REPORT_ARTICLE_CONFIRMATION_MSG: '举报文章成功，请等待负责人核实',
+  SECONDS_AGO: '秒前',
+  MINUTES_AGO: '分钟前',
+  HOURS_AGO: '小时前',
+  DAYS_AGO: '天前',
+  YEARS_AGO: '年前',
+  JUST: '刚刚'
 
 }
 
