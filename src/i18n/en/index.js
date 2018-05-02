@@ -95,7 +95,19 @@ const lang = {
   ASCH_WALLET: 'Asch wallet',
   SELECT_TRANSACTION_CURRENCY_TYPE_MSG: 'Please set transaction currency type',
   SELECT_TRANSACTION_AMOUNT_MSG: 'Please set the transaction amount',
-  MONEY_EXTRACTION_SUCCESS_MSG: 'Money extraction was successful. The transaction will be completed after a certain delay.'
+  MONEY_EXTRACTION_SUCCESS_MSG: 'Money extraction was successful. The transaction will be completed after a certain delay.',
+
+  /* publish.vue */
+  TITLE: '  Title',
+  LABEL: '  Label',
+  ARTICLE_CONTENT: 'Article content (up to 4096 characters)',
+  SUBMIT_ARTICLE: 'Submit',
+  ARTICLE_LENGTH_SHORTER_THEN_4096_BYTES: 'The length of the article should be less then 4096 bytes',
+  ARTICLE_OR_URL_NOT_BOTH_MSG: 'Provide either an article or submit an URL. Both are not allowed.',
+  BOTH_ARTICLE_AND_URL_CAN_NOT_BE_EMPTY: 'The article and URL can not be both be empty.',
+  ARTICLE_POSTED_SUCCESS_MSG: 'Article posted successfully. In about 10 seconds you will see the update',
+  URL_NOT_CORRECT_MSG: 'Please confirm whether the entered website is correct.',
+  LOG_JUDGING_SUCCESS: 'judging success'
 
 }
 

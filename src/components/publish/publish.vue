@@ -2,14 +2,14 @@
   <div class="pub_container">
     <div class="inner_wrapper">
       <div class="upper_form">
-        <input type="text" placeholder="  标题" @focus="clearError()" v-model="title">
+        <input type="text" v-bind:placeholder="$t('TITLE')" @focus="clearError()" v-model="title">
         <input type="text" placeholder="  URL" @focus="clearError()" v-model="url">
-        <input type="text" placeholder="  标签" @focus="clearError()" @keyup="dealWithTags()" v-model="tags" maxlength="20">
+        <input type="text" v-bind:placeholder="$t('LABEL')" @focus="clearError()" @keyup="dealWithTags()" v-model="tags" maxlength="20">
       </div>
       <div class="lower_form">
-        <textarea placeholder="文章内容(最多4096个字符)" maxlength="4096" v-model="text"></textarea>
-        <div class="btn btn_1"  @click="postarticle()">提交</div>
-        <div class="btn btn_2" @click="closeModal()">取消</div>
+        <textarea v-bind:placeholder="$t('ARTICLE_CONTENT')" maxlength="4096" v-model="text"></textarea>
+        <div class="btn btn_1"  @click="postarticle()">{{$t('SUBMIT_ARTICLE')}}</div>
+        <div class="btn btn_2" @click="closeModal()">{{$t('CANCEL')}}</div>
       </div>
     </div>
   </div>
@@ -35,21 +35,21 @@
         let that = this
         // untest
         if (this.text.length > 4096) {
-          this.$store.commit('callToast', {msgHeader: '警告', msgContent: '发布文章的内容长度要小于4096字节', _confirmfunc: '确定', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('CAVEAT'), msgContent: this.$t('ARTICLE_LENGTH_SHORTER_THEN_4096_BYTES'), _confirmfunc: this.$t('DETERMINE'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         if (this.text !== '' && this.url !== '') {
           this.isError = true
-          this.errorMsg = '网络地址与文章内容只能选填一个'
-          this.$store.commit('callToast', {msgHeader: '发生错误', msgContent: this.errorMsg, _confirmfunc: '确定', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          this.errorMsg = this.$t('ARTICLE_OR_URL_NOT_BOTH_MSG')
+          this.$store.commit('callToast', {msgHeader: this.$t('ERROR_OCURRED'), msgContent: this.errorMsg, _confirmfunc: this.$t('DETERMINE'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         } else if (this.text === '' && this.url === '') {
           this.isError = true
-          this.errorMsg = '网络地址与文章内容至少要填一项'
-          this.$store.commit('callToast', {msgHeader: '发生错误', msgContent: this.errorMsg, _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          this.errorMsg = this.$t('BOTH_ARTICLE_AND_URL_CAN_NOT_BE_EMPTY')
+          this.$store.commit('callToast', {msgHeader: this.$t('ERROR_OCURRED'), msgContent: this.errorMsg, _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         } else {
-          // 处理网址
+          // 处理网址 / Process URL
           if (this.url !== '') {
             let reg = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-./?%&=]*)?/
             if (reg.test(this.url)) {
@@ -63,17 +63,17 @@
                   if (err) {
                     return
                   }
-                  that.$store.commit('callToast', {msgHeader: '成功！', msgContent: '发布文章成功！大约十秒后看到更新', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+                  that.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('ARTICLE_POSTED_SUCCESS_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
                   window.history.go(-1)
                 }
               })
             } else {
-              // 错误处理
-              this.$store.commit('callToast', {msgHeader: '发生错误', msgContent: '请确认是否输入正确的网址，推荐直接复制', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+              // 错误处理 / error handling
+              this.$store.commit('callToast', {msgHeader: this.$t('ERROR_OCURRED'), msgContent: this.$t('URL_NOT_CORRECT_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
             }
             return
           } else {
-            // 文章传入
+            // 文章传入 / articles passed in
             let tagArr = this.pushInEvent
             that.$store.dispatch('invokeContract', {
               type: 1000,
@@ -84,7 +84,7 @@
                 if (err) {
                   return
                 }
-                that.$store.commit('callToast', {msgHeader: '成功！', msgContent: '发布文章成功！大约十秒后看到更新', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+                that.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('ARTICLE_POSTED_SUCCESS_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
                 that.$router.back()
               }
             })
@@ -99,7 +99,7 @@
         // this.$router.push('/news')
         this.$router.back()
       },
-      // 输入侦测
+      // 输入侦测 / input detection
       trim: function (m) {
         while ((m.length > 0) && (m.charAt(0) === ' ')) {
           m = m.substring(1, m.length)
@@ -109,7 +109,7 @@
         }
         return m
       },
-      // 按键结束处理标签内容
+      // 按键结束处理标签内容 / Press the key to end processing label content
       dealWithTags: function () {
         let tag = this.tags
         this.trim(tag)
@@ -124,7 +124,7 @@
         let aftTitle = this.title.trim()
         arr.push(aftTitle)
         arr.push(this.url)
-        // 格式化text($(_temp))
+        // 格式化text($(_temp)) / Formatting text($(_temp))
         let texta = this.text
         texta.replace(/\n/g, 'duri')
         console.log(texta)
@@ -135,7 +135,7 @@
     },
     created: function () {
       if (this.$store.state.isLogin === false) {
-        console.log('判断成功')
+        console.log(this.$t('LOG_JUDGING_SUCCESS'))
         this.$router.push('/top')
       }
     }

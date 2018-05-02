@@ -96,8 +96,19 @@ const lang = {
   ASCH_WALLET: '阿希钱包',
   SELECT_TRANSACTION_CURRENCY_TYPE_MSG: '请填写交易货币类型',
   SELECT_TRANSACTION_AMOUNT_MSG: '请填写交易数额',
-  MONEY_EXTRACTION_SUCCESS_MSG: '提币成功！交易将在一定延迟后完成'
+  MONEY_EXTRACTION_SUCCESS_MSG: '提币成功！交易将在一定延迟后完成',
 
+  /* publish.vue */
+  TITLE: '  标题',
+  LABEL: '  标签',
+  ARTICLE_CONTENT: '文章内容(最多4096个字符)',
+  SUBMIT_ARTICLE: '提交',
+  ARTICLE_LENGTH_SHORTER_THEN_4096_BYTES: '发布文章的内容长度要小于4096字节',
+  ARTICLE_OR_URL_NOT_BOTH_MSG: '网络地址与文章内容只能选填一个',
+  BOTH_ARTICLE_AND_URL_CAN_NOT_BE_EMPTY: '网络地址与文章内容至少要填一项',
+  ARTICLE_POSTED_SUCCESS_MSG: '发布文章成功！大约十秒后看到更新',
+  URL_NOT_CORRECT_MSG: '请确认是否输入正确的网址，推荐直接复制',
+  LOG_JUDGING_SUCCESS: '判断成功'
 }
 
 export default lang
