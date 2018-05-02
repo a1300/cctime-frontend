@@ -1,11 +1,11 @@
 <template>
   <div class="loginform">
     <div class="inner-wrap">
-      <span class="title">用户登录</span>
-      <input type="password" class="password" v-model="secret" minlength="20"  placeholder="  请输入密钥">
-      <a class="signUp" href="http://mainnet.asch.so/#/login" target="_blank">尚未拥有账户？</a>
-      <div class="loginbtn loginbtn1" @click="toLogin()">登录</div>
-      <div class="loginbtn loginbtn2" @click="toNotLogin()">取消</div>
+      <span class="title">{{$t('USER_LOGIN')}}</span>
+      <input type="password" class="password" v-model="secret" minlength="20"  v-bind:placeholder="$t('ENTER_KEY')">
+      <a class="signUp" href="http://mainnet.asch.so/#/login" target="_blank">{{$t('NO_ACCOUNT_QESTION')}}</a>
+      <div class="loginbtn loginbtn1" @click="toLogin()">{{$t('LOGIN')}}</div>
+      <div class="loginbtn loginbtn2" @click="toNotLogin()">{{$t('CANCEL')}}</div>
     </div>
   </div>
 </template>
@@ -28,11 +28,11 @@
         let regu = new RegExp(reg)
         let result = regu.test(this.secret)
         if (this.secret === '' || result === true) {
-          that.$store.commit('callToast', {msgHeader: '注意!', msgContent: '秘钥不能为空呦', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          that.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('KEY_CANNOT_BE_EMPTY'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         if (!Mnemonic.isValid(this.secret)) {
-          that.$store.commit('callToast', {msgHeader: '注意!', msgContent: '秘钥不符合规则', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          that.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('KEY_DOES_NOT_MEET_RULES'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         this.$store.dispatch('getUserInfo', {

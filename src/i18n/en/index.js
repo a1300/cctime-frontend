@@ -114,11 +114,18 @@ const lang = {
   RETURN_TO_HOME: 'Click here to return to the homepage, thank you, that you support CCTIME!',
 
   /* newpost.vue */
-  LOG_UPDATED_ONCE: '更新了一次'
+  LOG_UPDATED_ONCE: 'Updated once',
 
   /* newList.vue
      no translations
   */
+
+  /* login.vue */
+  USER_LOGIN: 'User login',
+  ENTER_KEY: '  Please enter the key',
+  NO_ACCOUNT_QESTION: 'Do not have a account?',
+  KEY_CANNOT_BE_EMPTY: 'Key can not be empty',
+  KEY_DOES_NOT_MEET_RULES: '秘钥不符合规则'
 
 }
 

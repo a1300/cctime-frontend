@@ -115,11 +115,19 @@ const lang = {
   RETURN_TO_HOME: '点击这里返回主页，感谢您对CCTime的大力支持！',
 
   /* newpost.vue */
-  LOG_UPDATED_ONCE: '更新了一次'
+  LOG_UPDATED_ONCE: '更新了一次',
 
   /* newList.vue
      no translations
   */
+
+  /* login.vue */
+  USER_LOGIN: '用户登录',
+  ENTER_KEY: '  请输入密钥',
+  NO_ACCOUNT_QESTION: '尚未拥有账户？',
+  KEY_CANNOT_BE_EMPTY: '秘钥不能为空呦',
+  KEY_DOES_NOT_MEET_RULES: '秘钥不符合规则'
+
 }
 
 export default lang
