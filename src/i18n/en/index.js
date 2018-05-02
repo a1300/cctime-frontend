@@ -133,15 +133,25 @@ const lang = {
   ASCH_OFFICIAL_QQ_GROUP: 'Official QQ Group: {num}',
 
   /* detail.vue */
-  RECEDE: '后退',
-  ENTER_COMMENT: '输入评论',
-  CLEAR: '清除',
-  POST_COMMENT: '发布评论',
-  CAN_NOT_PLAY_CCT: '你不能戏耍CCT',
-  GOT_IT: '知道了',
-  COMMENT_FEATURE_ONLY_AVAILABLE_IF_LOGGED_IN: '仅当您登录后才能使用评论功能',
-  INPUT_CAN_NOT_BE_EMPTY: '输入内容不能为空呦',
-  COMMENT_POSTED_SUCCESSFULL_MSG: '发布评论成功！大约十秒后看到更新'
+  RECEDE: 'Recede',
+  ENTER_COMMENT: 'Enter comment',
+  CLEAR: 'Clear',
+  POST_COMMENT: 'Post a comment',
+  CAN_NOT_PLAY_CCT: 'You can not play CCT',
+  GOT_IT: 'Got it',
+  COMMENT_FEATURE_ONLY_AVAILABLE_IF_LOGGED_IN: 'The comment feature is only available if you are logged in',
+  INPUT_CAN_NOT_BE_EMPTY: 'Input cannot be empty',
+  COMMENT_POSTED_SUCCESSFULL_MSG: 'The comment was successfully posted. In about 10 seconds you will see the update.',
+
+  /* detailListl.vue */
+  REPLY: 'Reply',
+  ENTER_COMMENT_WITH_SPACE: '  Enter comment',
+  REPLY_FEATURE_ONLY_AVAILABLE_IF_LOGGED_IN: 'The reply feature is only available if you are logged in.',
+  REPORT_COMMENT_ONLY_WHEN_LOGGED_IN: 'You can only report a comment if you are logged in.',
+  REPORT_THIS_COMMENT_QM: 'Report this comment?',
+  THE_INPUT_CAN_NOT_BE_EMPTY: 'The input can not be empty',
+  REPLY_TO_COMMENT_WAS_SUCCESSFUL_MSG: 'The reply to the comment was successful. In about 10 seconds you will see the the update.',
+  REPORT_COMMENT_QM: 'Should this comment be reported?'
 
 }
 

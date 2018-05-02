@@ -142,8 +142,17 @@ const lang = {
   GOT_IT: '知道了',
   COMMENT_FEATURE_ONLY_AVAILABLE_IF_LOGGED_IN: '仅当您登录后才能使用评论功能',
   INPUT_CAN_NOT_BE_EMPTY: '输入内容不能为空呦',
-  COMMENT_POSTED_SUCCESSFULL_MSG: '发布评论成功！大约十秒后看到更新'
+  COMMENT_POSTED_SUCCESSFULL_MSG: '发布评论成功！大约十秒后看到更新',
 
+  /* detailListl.vue */
+  REPLY: '回复',
+  ENTER_COMMENT_WITH_SPACE: '  输入评论',
+  REPLY_FEATURE_ONLY_AVAILABLE_IF_LOGGED_IN: '仅当您登录后才能使用回复功能',
+  REPORT_COMMENT_ONLY_WHEN_LOGGED_IN: '仅当您登录后才能使用举报功能',
+  REPORT_THIS_COMMENT_QM: '是否对该评论进行举报？',
+  THE_INPUT_CAN_NOT_BE_EMPTY: '输入的内容不能为空呦',
+  REPLY_TO_COMMENT_WAS_SUCCESSFUL_MSG: '回复评论成功！大约十秒后看到更新',
+  REPORT_COMMENT_QM: '是否举报该评论'
 }
 
 export default lang

@@ -2,26 +2,26 @@
   <li class="comment_list">
     <div class="user_id">
       <img :src="'data:image/png;base64,' + item.photo">{{item.nickname || item.authorId}}
-      <span class="reply_msg" v-if="!!item.replyAuthorName">回复&nbsp;&nbsp;&nbsp;&nbsp;{{item.replyAuthorName}}</span>
-      <span class="reply_msg" v-else-if="!!item.replyAuthorId">回复&nbsp;&nbsp;&nbsp;&nbsp;{{item.replyAuthorId}}</span>
+      <span class="reply_msg" v-if="!!item.replyAuthorName">{{$t('REPLY')}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.replyAuthorName}}</span>
+      <span class="reply_msg" v-else-if="!!item.replyAuthorId">{{$t('REPLY')}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.replyAuthorId}}</span>
       <span class="reply_time">{{this.realT}}</span>
     </div>
     <p>{{item.content}}</p>
     <div class="interaction_c">
-      <span @click="reportBtn" v-if="this.$store.state.userInfo.info.isDelegate === true">举报</span>
-      <span @click="toggleReply()">回复</span>
+      <span @click="reportBtn" v-if="this.$store.state.userInfo.info.isDelegate === true">{{$t('REPORT')}}</span>
+      <span @click="toggleReply()">{{$t('REPLY')}}</span>
       <span class="award_c">
         <div class="award_c_tool" v-show="isAwardToggle == true">
-          <input type="number" placeholder="请输入打赏票数" v-model="awardNum">
-          <div class="award_confirm" @click="voteBtn">确认</div>
+          <input type="number" v-bind:placeholder="$t('ENTER_NUMBER_OF_TICKETS')" v-model="awardNum">
+          <div class="award_confirm" @click="voteBtn">{{$t('CONFIRM')}}</div>
         </div>
-        <div @click="voteBtn">打赏</div>
+        <div @click="voteBtn">{{$t('REWARD')}}</div>
       </span>
     </div>
     <div class="reply_container" v-show="isReplyToggle == true">
-      <input type="text" v-model="replyContent" placeholder="  输入评论">
+      <input type="text" v-model="replyContent" v-bind:placeholder="$t('ENTER_COMMENT_WITH_SPACE')">
       <div class="interaction_c">
-        <span @click="toggleReply()">取消</span><span @click="reply(item.id)">发布评论</span>
+        <span @click="toggleReply()">{{$t('CANCEL')}}</span><span @click="reply(item.id)">{{$t('POST_COMMENT')}}</span>
       </div>
     </div>
   </li>  
@@ -61,22 +61,22 @@ export default {
       let day = 0
       let yea = 0
       if (sec < 60) {
-        pst = Math.floor(sec) + '秒前'
+        pst = Math.floor(sec) + this.$t('SECONDS_AGO')
       } else {
         min = Math.floor(sec / 60)
         if (min < 60) {
-          pst = Math.floor(min) + '分钟前'
+          pst = Math.floor(min) + this.$t('MINUTES_AGO')
         } else {
           hor = Math.floor(min / 60)
           if (hor < 24) {
-            pst = hor + '小时前'
+            pst = hor + this.$t('HOURS_AGO')
           } else {
             day = Math.floor(hor / 24)
             if (day < 360) {
-              pst = day + '天前'
+              pst = day + this.$t('DAYS_AGO')
             } else {
               yea = Math.floor(day / 360)
-              pst = yea + '年前'
+              pst = yea + this.$t('YEARS_AGO')
             }
           }
         }
@@ -85,12 +85,12 @@ export default {
     }
   },
   methods: {
-    // 动画开关
+    // 动画开关 / Animation switch
     toggleReply: function () {
       console.log(this.item)
       let that = this
       if (that.$store.state.isLogin === false) {
-        that.$store.commit('callToast', {msgHeader: '注意!', msgContent: '仅当您登录后才能使用回复功能', _confirmfunc: '去登录', _cancelfunc: '不了', deals: undefined, contract: 3})
+        that.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('REPLY_FEATURE_ONLY_AVAILABLE_IF_LOGGED_IN'), _confirmfunc: this.$t('GO_TO_LOGIN'), _cancelfunc: this.$t('CAN_NOT'), deals: undefined, contract: 3})
         return
       }
       this.replyContent = ''
@@ -99,7 +99,7 @@ export default {
     toggleAward: function () {
       this.isAwardToggle = !this.isAwardToggle
     },
-    // 组织回复arg
+    // 组织回复arg / Organization reply arg
     pushInEvent: function (isReply, pid, commentCotent) {
       let arr = []
       if (isReply) {
@@ -114,7 +114,7 @@ export default {
         return arr
       }
     },
-    // 组织打赏arg
+    // 组织打赏arg / The organization enjoys arg
     pushAward: function (id, amount) {
       let arr = []
       arr.push(id)
@@ -134,37 +134,37 @@ export default {
           if (err) {
             return
           }
-          that.$store.commit('callToast', {msgHeader: '成功！', msgContent: '打赏评论成功！', _confirmfunc: '确定', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          that.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('REWARD_REVIEW_SUCCESS_MSG'), _confirmfunc: this.$t('DETERMINE'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
         }
       })
-      // 重新初始化
+      // 重新初始化 / Reinitialize
     },
-    // 调用投票  调用toastinput里的方法
+    // 调用投票  调用toastinput里的方法 / Call Voting Call method in toastinput
     voteBtn: function () {
       let that = this
       if (that.$store.state.isLogin === false) {
-        that.$store.commit('callToast', {msgHeader: '注意!', msgContent: '仅当您登录后才能使用打赏功能', _confirmfunc: '去登录', _cancelfunc: '不了', deals: undefined, contract: 3})
+        that.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('CAN_REWARD_FEATURE_ONLY_WHEN_LOGGED_IN'), _confirmfunc: this.$t('GO_TO_LOGIN'), _cancelfunc: this.$t('CAN_NOT'), deals: undefined, contract: 3})
         return
       }
-      this.$store.commit('callInputToast', {msgHeader: '打赏', msgContent: '请输入打赏票数', _confirmfunc: null, _cancelfunc: null, deals: that.item.id, contract: 1})
+      this.$store.commit('callInputToast', {msgHeader: this.$t('REWARD'), msgContent: this.$t('ENTER_NUMBER_OF_TICKETS'), _confirmfunc: null, _cancelfunc: null, deals: that.item.id, contract: 1})
     },
-    // 举报评论
+    // 举报评论 / report comment
     reportBtn: function () {
       let that = this
       if (that.$store.state.isLogin === false) {
-        that.$store.commit('callToast', {msgHeader: '注意!', msgContent: '仅当您登录后才能使用举报功能', _confirmfunc: '去登录', _cancelfunc: '不了', deals: undefined, contract: 3})
+        that.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('REPORT_COMMENT_ONLY_WHEN_LOGGED_IN'), _confirmfunc: this.$t('GO_TO_LOGIN'), _cancelfunc: this.$t('CAN_NOT'), deals: undefined, contract: 3})
         return
       }
-      this.$store.commit('callToast', {msgHeader: '警告', msgContent: '是否对该评论进行举报？', _confirmfunc: '举报', _cancelfunc: '不了', deals: that.item.id, contract: 1})
+      this.$store.commit('callToast', {msgHeader: this.$t('CAVEAT'), msgContent: this.$t('REPORT_THIS_COMMENT_QM'), _confirmfunc: this.$t('REPORT'), _cancelfunc: this.$t('CAN_NOT'), deals: that.item.id, contract: 1})
     },
-    // 回复评论
+    // 回复评论 / Reply to comments
     reply: function (pid, num) {
       let that = this
       let reg = '^[ ]+$'
       let regu = new RegExp(reg)
       let result = regu.test(this.commentContent)
       if (this.replyContent === '' || result === true) {
-        that.$store.commit('callToast', {msgHeader: '注意!', msgContent: '输入的内容不能为空呦', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+        that.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('THE_INPUT_CAN_NOT_BE_EMPTY'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
         return
       }
       let reArg = this.pushInEvent(true, pid, this.replyContent)
@@ -178,17 +178,17 @@ export default {
           if (err) {
             return
           }
-          that.$store.commit('callToast', {msgHeader: '成功！', msgContent: '回复评论成功！大约十秒后看到更新', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          that.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('REPLY_TO_COMMENT_WAS_SUCCESSFUL_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           that.$emit('reFresh')
         }
       })
       this.replyContent = ''
       /* setTimeout(function () { return window.history.go(0) }, 3000) */
     },
-    // 举报评论
+    // 举报评论 / report comment
     reportC: function () {
       let that = this
-      this.$store.commit('callInputToast', {msgHeader: '警告', msgContent: '是否举报该评论', _confirmfunc: '举报', _cancelfunc: '不了', deals: that.item.id, contract: 3})
+      this.$store.commit('callInputToast', {msgHeader: this.$t('CAVEAT'), msgContent: this.$t('REPORT_COMMENT_QM'), _confirmfunc: this.$t('REPORT'), _cancelfunc: this.$t('CAN_NOT'), deals: that.item.id, contract: 3})
     }
   }
 }
