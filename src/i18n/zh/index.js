@@ -76,7 +76,13 @@ const lang = {
   JUST: '刚刚',
 
   /* toastmsg.vue */
-  REPORT_COMMENT_CONFIRMATION_MSG: '举报评论成功！请等待负责人核实'
+  REPORT_COMMENT_CONFIRMATION_MSG: '举报评论成功！请等待负责人核实',
+
+  /* toastinput.vue */
+  DETERMINE: '确定',
+  REWARD_MUST_BE_INTEGER_MSG: '打赏金额必须为整数！',
+  REWARD_REVIEW_SUCCESS_MSG: '打赏评论成功！',
+  REWARDED_ARTICLE_SUCCESS_MSG: '打赏文章成功！'
 }
 
 export default lang

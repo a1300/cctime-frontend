@@ -75,8 +75,13 @@ const lang = {
   JUST: 'just',
 
   /* toastmsg.vue */
-  REPORT_COMMENT_CONFIRMATION_MSG: '举报评论成功！请等待负责人核实'
+  REPORT_COMMENT_CONFIRMATION_MSG: '举报评论成功！请等待负责人核实',
 
+  /* toastinput.vue */
+  DETERMINE: '确定',
+  REWARD_MUST_BE_INTEGER_MSG: 'The reward must be an integer!',
+  REWARD_REVIEW_SUCCESS_MSG: 'Rewarded the review successfully!',
+  REWARDED_ARTICLE_SUCCESS_MSG: '打赏文章成功！'
 }
 
 export default lang

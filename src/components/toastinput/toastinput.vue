@@ -7,8 +7,8 @@
           <input type="number" placeholder="  请输入奖赏金额" min="0" v-model="price" @blur="emitPrice">
         </div>
         <div class="toastctr">
-          <span class="confirm" @click="todo()">确定</span>
-          <span class="cancel" @click="callOff()">取消</span>
+          <span class="confirm" @click="todo()">{{$t('DETERMINE')}}</span>
+          <span class="cancel" @click="callOff()">{{$t('CANCEL')}}</span>
         </div>
     </div>
   </div>
@@ -28,7 +28,7 @@ export default {
   methods: {
     todo: function () {
       if (String(this.price).indexOf('.') > 0) {
-        this.$store.commit('callToast', {msgHeader: '注意！', msgContent: '打赏金额必须为整数！', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+        this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('REWARD_MUST_BE_INTEGER_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
         this.toastInputState.isShowToast = false
         return
       }
@@ -65,11 +65,11 @@ export default {
       num = Number(num)
       switch (num) {
         case 1:
-        // 打赏评论
+        // 打赏评论 / reward comment
           this.confirmFunction = function () {
             let that = this
             let a = []
-            // 需要传入一个deal对象,有1,有id, 有num
+            // 需要传入一个deal对象,有1,有id, 有num / Need to pass a deal object, have 1, have id, have num
             a.push(this.toastInputState.deals)
             a.push(String(this.getPrice))
             that.$store.dispatch('invokeContract', {
@@ -81,7 +81,7 @@ export default {
                 if (err) {
                   return
                 }
-                that.$store.commit('callToast', {msgHeader: '成功！', msgContent: '打赏评论成功！', _confirmfunc: '确定', _cancelfunc: '关闭', deals: undefined, contract: 4})
+                that.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('REWARD_REVIEW_SUCCESS_MSG'), _confirmfunc: this.$t('DETERMINE'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
               }
             })
           }
@@ -93,11 +93,11 @@ export default {
           }
           break
         case 2:
-            // 打赏文章
+            // 打赏文章 / reward article
           this.confirmFunction = function () {
             let that = this
             let a = []
-                // 需要传入一个deal对象,有2,有id, 有num
+                // 需要传入一个deal对象,有2,有id, 有num / Need to pass in a deal object, there are 2, there id, there num
             a.push(this.toastInputState.deals)
             a.push(String(this.getPrice))
             this.$store.dispatch('invokeContract', {
@@ -109,7 +109,7 @@ export default {
                 if (err) {
                   return
                 }
-                that.$store.commit('callToast', {msgHeader: '成功！', msgContent: '打赏文章成功！', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+                that.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('REWARDED_ARTICLE_SUCCESS_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
               }
             })
           }
