@@ -82,7 +82,22 @@ const lang = {
   DETERMINE: '确定',
   REWARD_MUST_BE_INTEGER_MSG: '打赏金额必须为整数！',
   REWARD_REVIEW_SUCCESS_MSG: '打赏评论成功！',
-  REWARDED_ARTICLE_SUCCESS_MSG: '打赏文章成功！'
+  REWARDED_ARTICLE_SUCCESS_MSG: '打赏文章成功！',
+
+  /* recharge.vue */
+  COIN: '提币',
+  ENTER_CURRENCY: '输入要提取的币种',
+  COINAGE_CURRENCY: '提币币种',
+  NUMBER_OF_EXTRACTIONS: '提取数量',
+  PROCESSING_FEE: '手续费{fee}',
+  CONFIRM_COINS: '确认提币',
+  CHARGING_MONEY: '充币',
+  COIN_CHARGE_VIA_ASCH_WALLET: '要执行充币的操作请移步',
+  ASCH_WALLET: '阿希钱包',
+  SELECT_TRANSACTION_CURRENCY_TYPE_MSG: '请填写交易货币类型',
+  SELECT_TRANSACTION_AMOUNT_MSG: '请填写交易数额',
+  MONEY_EXTRACTION_SUCCESS_MSG: '提币成功！交易将在一定延迟后完成'
+
 }
 
 export default lang

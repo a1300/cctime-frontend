@@ -81,7 +81,22 @@ const lang = {
   DETERMINE: '确定',
   REWARD_MUST_BE_INTEGER_MSG: 'The reward must be an integer!',
   REWARD_REVIEW_SUCCESS_MSG: 'Rewarded the review successfully!',
-  REWARDED_ARTICLE_SUCCESS_MSG: '打赏文章成功！'
+  REWARDED_ARTICLE_SUCCESS_MSG: '打赏文章成功！',
+
+  /* recharge.vue */
+  COIN: 'COIN',
+  ENTER_CURRENCY: 'Enter currency',
+  COINAGE_CURRENCY: 'Coinage currency',
+  NUMBER_OF_EXTRACTIONS: 'Number of extractions',
+  PROCESSING_FEE: 'Processing fee of {fee}',
+  CONFIRM_COINS: 'Confirm the coins',
+  CHARGING_MONEY: '充币',
+  COIN_CHARGE_VIA_ASCH_WALLET: 'To perform a coin charge operation please navigate to',
+  ASCH_WALLET: 'Asch wallet',
+  SELECT_TRANSACTION_CURRENCY_TYPE_MSG: 'Please set transaction currency type',
+  SELECT_TRANSACTION_AMOUNT_MSG: 'Please set the transaction amount',
+  MONEY_EXTRACTION_SUCCESS_MSG: 'Money extraction was successful. The transaction will be completed after a certain delay.'
+
 }
 
 export default lang

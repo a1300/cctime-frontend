@@ -1,27 +1,27 @@
 <template>
   <div class="charge_container">
     <div class="header">
-        <h1>提币</h1>
+        <h1>{{$t('COIN')}}</h1>
     </div>
     <div class="deal_part">
-        <span>输入要提取的币种</span>
+        <span>{{$t('ENTER_CURRENCY')}}</span>
         <div class="deal_form">
         <select type="text" v-model="trans_type">
-            <option disabled selected>提币币种</option>
+            <option disabled selected>{{$t('COINAGE_CURRENCY')}}</option>
             <option v-for="item in this.userInfo.info.balances">{{item.currency}}</option>
         </select>
-        <input type="number" placeholder="提取数量" v-model="trans_num">
-        <input type="text" class="calculate" placeholder="手续费0.1" disabled><span class="calculate_info"></span>
+        <input type="number" v-bind:placeholder="$t('NUMBER_OF_EXTRACTIONS')" v-model="trans_num">
+        <input type="text" class="calculate" v-bind:placeholder="$t('PROCESSING_FEE', { fee: 0.1 })" disabled><span class="calculate_info"></span>
         </div>
     </div>
     <div class="confirm_btn">
-      <span class="btn" @click="toWithdraw">确认提币</span>
+      <span class="btn" @click="toWithdraw">{{$t('CONFIRM_COINS')}}</span>
     </div>
     <div class="header">
-      <h1>充币</h1>
+      <h1>{{$t('CHARGING_MONEY')}}</h1>
     </div>
     <div class="address">
-      <p>要执行充币的操作请移步<a href="http://mainnet.asch.io" target="_blank">阿希钱包</a></p>
+      <p>{{$t('COIN_CHARGE_VIA_ASCH_WALLET')}}<a href="http://mainnet.asch.io" target="_blank">{{$t('ASCH_WALLET')}}</a></p>
     </div>
   </div>
 </template>
@@ -43,11 +43,11 @@
       toWithdraw: function () {
         let that = this
         if (this.trans_type === '') {
-          this.$store.commit('callToast', {msgHeader: '注意！', msgContent: '请填写交易货币类型', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('SELECT_TRANSACTION_CURRENCY_TYPE_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         if (Number(this.trans_num) === 0 || null) {
-          that.$store.commit('callToast', {msgHeader: '注意！', msgContent: '请填写交易数额', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          that.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('SELECT_TRANSACTION_AMOUNT_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         let a = []
@@ -63,7 +63,7 @@
             if (err) {
               return
             }
-            that.$store.commit('callToast', {msgHeader: '成功！', msgContent: '提币成功！交易将在一定延迟后完成', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+            that.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('MONEY_EXTRACTION_SUCCESS_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           }
         })
         this.init()
@@ -77,7 +77,7 @@
     },
     computed: {
       ...mapState(['userInfo']),
-      // 手续费计算
+      // 手续费计算 / Processing fee calculation
       trans_fee: function () {
         if (this.trans_num === undefined) {
           return 0
