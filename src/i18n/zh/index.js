@@ -42,7 +42,12 @@ const lang = {
   OK: '了解',
   SHUTDOWN: '关闭',
   SELECT_TRANSACTION_TYPE_FIRST: '请先选择交易内容！',
-  SELECT_TRANSACTION_ADDRESS_FIRST: '请先选择交易对象地址！'
+  SELECT_TRANSACTION_ADDRESS_FIRST: '请先选择交易对象地址！',
+  ADDRESS_CAN_NOT_HAVE_SPACES: '交易地址不得有空格/回车',
+  AMOUNT_MUST_BE_GREATER_THEN_ZERO: '请确认交易数额大于零！',
+  ADDRESS_NOT_IN_RIGHT_FORMAT: '您输入的地址不符合阿希规范',
+  SUCCESS: '成功！',
+  TRANSFER_SUCCESSFUL_MSG: '转账成功，根据环境原因转账时间可能会略有延长'
 
 }
 

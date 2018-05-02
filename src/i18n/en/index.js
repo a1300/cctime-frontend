@@ -37,11 +37,17 @@ const lang = {
   TRANSFER_AMOUNT: 'Amount',
   SENDING_TIME: 'time send',
   CURRENCY: '币种',
-  TRANSACTION_NOT_COMPLETED: '上一次交易尚未完成，请稍后',
-  OK: '了解',
-  SHUTDOWN: '关闭',
-  SELECT_TRANSACTION_TYPE_FIRST: 'Please select the transaction type first',
-  SELECT_TRANSACTION_ADDRESS_FIRST: 'Please select the transaction address first!'
+  TRANSACTION_NOT_COMPLETED: 'The previous transaction has not been completed yet. Please wait.',
+  OK: 'OK',
+  SHUTDOWN: 'Shut down',
+  SELECT_TRANSACTION_TYPE_FIRST: 'Please select the transaction type first!',
+  SELECT_TRANSACTION_ADDRESS_FIRST: 'Please select the transaction address first!',
+  ADDRESS_CAN_NOT_HAVE_SPACES: 'Trading address can not have spaces!',
+  AMOUNT_MUST_BE_GREATER_THEN_ZERO: 'The transaction amount must be greater then zero!',
+  ADDRESS_NOT_IN_RIGHT_FORMAT: 'The entered address is not in the right format!',
+  SUCCESS: 'Success!',
+  TRANSFER_SUCCESSFUL_MSG: 'Transfers are successful and transfer time may be slightly longer depending on the circumstances'
+
 }
 
 export default lang

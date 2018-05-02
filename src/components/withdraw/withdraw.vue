@@ -99,19 +99,19 @@
           return
         }
         if (this.trans_address === '') {
-          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: '请先选择交易对象地址！', _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('SELECT_TRANSACTION_ADDRESS_FIRST'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         if (this.trans_address.indexOf(' ') !== -1) {
-          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: '交易地址不得有空格/回车', _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('ADDRESS_CAN_NOT_HAVE_SPACES'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         if (this.trans_num <= 0) {
-          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: '请确认交易数额大于零！', _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('AMOUNT_MUST_BE_GREATER_THEN_ZERO'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         if (!aschJS.crypto.isAddress(this.trans_address)) {
-          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: '您输入的地址不符合阿希规范', _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('ADDRESS_NOT_IN_RIGHT_FORMAT'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         // 组织args
@@ -131,7 +131,7 @@
               that.init()
               return
             }
-            // 增加转账后更新
+            // 增加转账后更新 / Increase after transfer
             setTimeout(function () {
               that.$store.dispatch('getTransactionInfo', {
                 limit: String(that.pageContent),
@@ -143,8 +143,8 @@
             setTimeout(function () {
               that.$router.go(0)
             }, 12000)
-            // 初始化本地state
-            that.$store.commit('callToast', {msgHeader: '成功！', msgContent: '转账成功，根据环境原因转账时间可能会略有延长', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+            // 初始化本地state / Initialize the local state
+            that.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('TRANSFER_SUCCESSFUL_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
             that.init()
           }
         })
@@ -192,7 +192,7 @@
           return
         }
       },
-      // 页面跳转
+      // 页面跳转 / Page jump
       goto: function (index) {
         console.log('goto', index)
         let that = this
@@ -206,11 +206,11 @@
           that: that
         })
       },
-      // 切换选项表主动查询
+      // 切换选项表主动查询 / Switching options table active query
       toQuery: function () {
         let that = this
-        // 以下是触发Action内容
-        // 输出$state list内容
+        // 以下是触发Action内容 / The following is the trigger Action content
+        // 输出$state list内容 / Output $state list content
         this.$store.dispatch('getTransactionInfo', {
           limit: String(that.pageContent),
           offset: 0,
@@ -221,14 +221,14 @@
     },
     computed: {
       ...mapState(['userInfo', 'currentPage_account']),
-      // 计算手续费
+      // 计算手续费 / calculate fee
       trans_fee: function () {
         if (this.trans_num === undefined) {
           return 0
         }
         return this.trans_num * 0.005
       },
-      // 计算费用传入单位
+      // 计算费用传入单位 / Calculate the cost of incoming units
       trans_unit: function () {
         return String(this.trans_num * 1e8)
       },
@@ -260,7 +260,7 @@
       switchGroup: function () {
         return this.$store.getters['transactionListGetter'].transfers
       },
-      // 构造页签数组
+      // 构造页签数组 / Constructing an array of tabs
       page: function () {
         let pag = []
         if (this.currentPage_account < this.pageSpots) {
@@ -280,11 +280,11 @@
         }
         return pag
       },
-      // 页签总数
+      // 页签总数 / total number of tabs
       allPage: function () {
         return Math.ceil(Number(this.$store.getters['transactionListGetter'].count) / this.pageContent)
       },
-      // 返回偏移量
+      // 返回偏移量 / return offset
       offsetNum: function () {
         return this.currentPage_account * this.pageContent
       }
@@ -292,8 +292,9 @@
     created: function () {
       console.log(aschJS)
       let that = this
-      // 以下是触发Action内容
-      // 输出$state list内容
+      // 以下是触发Action内容 / The following is the trigger Action content
+      // 输出$state list内容 / Output $state list content
+
       this.$store.dispatch('getTransactionInfo', {
         limit: String(that.pageContent),
         offset: 0,
