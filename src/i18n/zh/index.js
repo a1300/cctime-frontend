@@ -73,8 +73,10 @@ const lang = {
   HOURS_AGO: '小时前',
   DAYS_AGO: '天前',
   YEARS_AGO: '年前',
-  JUST: '刚刚'
+  JUST: '刚刚',
 
+  /* toastmsg.vue */
+  REPORT_COMMENT_CONFIRMATION_MSG: '举报评论成功！请等待负责人核实'
 }
 
 export default lang

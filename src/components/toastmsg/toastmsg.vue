@@ -48,7 +48,7 @@ export default {
         this.toastState.isShowToast = false
       }
     },
-    // 本地状态重置
+    // 本地状态重置 / just...
     reset: function () {
       this.confirmFunction = null
       this.cancelFunction = null
@@ -57,11 +57,11 @@ export default {
       num = Number(num)
       switch (num) {
         case 1:
-          // 举报评论
+          // 举报评论 / report comment
           this.confirmFunction = function () {
             let that = this
             let a = []
-            // 传入两个值： deal=1  idr
+            // 传入两个值： deal=1  idr / Pass in two values: deal=1 idr
             a.push('2')
             a.push(this.toastState.deals)
             this.$store.dispatch('invokeContract', {
@@ -73,7 +73,7 @@ export default {
                 if (err) {
                   return
                 }
-                that.$store.commit('callToast', {msgHeader: '成功！', msgContent: '举报评论成功！请等待负责人核实', _confirmfunc: '了解', _cancelfunc: '关闭', deals: 0, contract: 4})
+                that.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('REPORT_COMMENT_CONFIRMATION_MSG'), _confirmfunc: this.$('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: 0, contract: 4})
               }
             })
           }
@@ -82,11 +82,11 @@ export default {
           }
           break
         case 2:
-          // 举报文章
+          // 举报文章 / report article
           this.confirmFunction = function () {
             let that = this
             let a = []
-            // 传入 deals = 2 id
+            // 传入 deals = 2 id / Incoming deals = 2 id
             a.push('1')
             a.push(this.toastState.deals)
             this.$store.dispatch('invokeContract', {
@@ -98,7 +98,7 @@ export default {
                 if (err) {
                   return
                 }
-                that.$store.commit('callToast', {msgHeader: '成功！', msgContent: '举报文章成功！请等待负责人核实', _confirmfunc: '了解', _cancelfunc: '关闭', deals: 0, contract: 4})
+                that.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('REPORT_ARTICLE_CONFIRMATION_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTODOWN'), deals: 0, contract: 4})
               }
             })
           }
@@ -107,9 +107,9 @@ export default {
           }
           break
         case 3:
-          // 返回首页
+          // 返回首页 / return home
           this.confirmFunction = function () {
-            // 不用传入任何参数
+            // 不用传入任何参数 / Do not pass any parameters
             this.$router.push('/login')
           }
           this.cancelFunction = function () {
@@ -117,7 +117,7 @@ export default {
           }
           break
         case 4:
-          // 错误处理
+          // 错误处理 / error handling
           this.confirmFunction = function () {
             this.toastState.isShowToast = false
           }
@@ -126,7 +126,7 @@ export default {
           }
           break
         case 5:
-          // 注销确认
+          // 注销确认 / Cancellation confirmation
           console.log(this)
           this.confirmFunction = function () {
             this.$store.commit('logOut')
