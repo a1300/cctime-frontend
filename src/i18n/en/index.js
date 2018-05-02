@@ -150,8 +150,24 @@ const lang = {
   REPORT_COMMENT_ONLY_WHEN_LOGGED_IN: 'You can only report a comment if you are logged in.',
   REPORT_THIS_COMMENT_QM: 'Report this comment?',
   THE_INPUT_CAN_NOT_BE_EMPTY: 'The input can not be empty',
-  REPLY_TO_COMMENT_WAS_SUCCESSFUL_MSG: 'The reply to the comment was successful. In about 10 seconds you will see the the update.',
-  REPORT_COMMENT_QM: 'Should this comment be reported?'
+  REPLY_TO_COMMENT_WAS_SUCCESSFUL_MSG: 'The reply to the comment was successful. In about 10 seconds you will see the update.',
+  REPORT_COMMENT_QM: 'Should this comment be reported?',
+
+  /* account.vue */
+  IMG_ALT_TEXT: 'Refresh',
+  IMG_TITLE: 'Refresh',
+  USER_NAME: 'Username: ',
+  ENTER_NICKNAME: '  Enter nickname',
+  LAND: 'Land',
+  SITE: 'Site: ',
+  CHARGE_WITHDRAWAL: 'Charge/Withdrawal',
+  NICKNAME_NOT_EMPTY_MSG: 'The nickname should be filled',
+  NICKNAME_NOT_LONGER_THEN_20_BYTES: 'The nickname should not be longer then 20 bytes.',
+  NICKNAME_SET_SUCCESSFUL_MSG: 'Nickname successfully modified. In about 10 seconds you will see the update.',
+  REFRESH_SUCCESSFUL_MSG: 'Refresh was successful (F5 is not recommended)',
+  I_WAS: 'I was',
+  PERSONAL_INFORMATION_NOT_SET_MSG: 'Personal information not set',
+  NO_BALANCE_INFORMATION: 'No balance information found. It may be a new user or an incorrect input key.'
 
 }
 

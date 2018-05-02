@@ -1,36 +1,36 @@
 <template>
   <div class="account_container">
     <div class="header">
-      <p>我的账户</p>
-      <img src="/static/img/refresh.png" alt="刷新" title="刷新" @click="clickRefresh">
+      <p>{{$t('MY_ACCOUNT')}}</p>
+      <img src="/static/img/refresh.png" v-bind:alt="$t('IMG_ALT_TEXT')" v-bind:title="$t('IMG_TITLE')" @click="clickRefresh">
     </div>
     <div class="content">
       <div class="content_header">
         <img class="logo" :src="'data:image/png;base64,' + this.$store.state.userInfo.info.logo">
         <div class="info_contain">
           <div class="info_username">
-            用户名：<span v-show="this.isSetNickToggle == false">{{this.accountName}}</span>
-            <!--设置收缩框-->
+            {{$t('USER_NAME')}}<span v-show="this.isSetNickToggle == false">{{this.accountName}}</span>
+            <!--设置收缩框 / Set the shrink box-->
             <div class="setNickBox" v-show="this.isSetNickToggle == true">
-              <input type="text" placeholder="  输入昵称" v-model="nickName"/>
-              <div class="check" @click="setNickName">确认</div>
-              <div class="check" @click="toggleNickBox">取消</div>
+              <input type="text" v-bind:placeholder="$('ENTER_NICKNAME')" v-model="nickName"/>
+              <div class="check" @click="setNickName">{{$t('CONFIRM')}}</div>
+              <div class="check" @click="toggleNickBox">{{$t('CANCEL')}}</div>
             </div>
             <img src="/static/img/rewrite.png" @click="toggleNickBox" v-show="!isSetNickToggle" :class="{ hidebox: isHide }">
           </div>
-          <div class="info_address">地&nbsp;&nbsp;址：<span>{{this.address}}</span></div>
+          <div class="info_address">{{$t('LAND')}}&nbsp;&nbsp;{{$t('SITE')}}：<span>{{this.address}}</span></div>
           <span v-if="this.isEmpty" class="warning">{{accountInfo}}</span>
         </div>
       </div>
       <div class="ctr_group">
-        <router-link to="withdraw/">站内转账</router-link>
-        <router-link to="recharge/">充/提币</router-link>
+        <router-link to="withdraw/">{{$t('TRANSFER_WITHIN_STATION')}}</router-link>
+        <router-link to="recharge/">{{$t('CHARGE_WITHDRAWAL')}}</router-link>
       </div>
       <div class="content_table">
         <table cellspacing="10">
           <tr>
-            <th>币种</th>
-            <th>数量</th>
+            <th>{{$t('CURRENCY')}}</th>
+            <th>{{$t('QUANTITY')}}</th>
           </tr>
           <tr v-for="cash in this.$store.getters['newAccount'].balances">
             <td>{{cash.currency}}</td>
@@ -67,11 +67,11 @@
         let that = this
         let nick = this.nickName
         if (nick.trim() === '') {
-          this.$store.commit('callToast', {msgHeader: '发生错误', msgContent: '昵称不能为空', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('ERROR_OCURRED'), msgContent: this.$t('NICKNAME_NOT_EMPTY_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         if (this.nickName.length > 20) {
-          this.$store.commit('callToast', {msgHeader: '发生错误', msgContent: '昵称必须小于等于20个字节', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('ERROR_OCURRED'), msgContent: this.$t('NICKNAME_NOT_LONGER_THEN_20_BYTES'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           this.nickName = ''
           return
         } else {
@@ -85,14 +85,14 @@
               if (err) {
                 return
               }
-              that.$store.commit('callToast', {msgHeader: '成功！', msgContent: '修改昵称成功！(大约十秒后您的信息将被更新)', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
-              // 先仅仅commit测试下
+              that.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('NICKNAME_SET_SUCCESSFUL_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
+              // 先仅仅commit测试下 / First just commit test
               setTimeout(function () {
                 that.$store.dispatch('getUserInfo', {
                   secret: that.$store.state.userInfo.secret,
                   that: that
                 })
-                // 刷新判断是否要显示名称修改
+                // 刷新判断是否要显示名称修改 / Refresh to determine whether to display name changes
                 console.log(that.$store.state.userInfo)
                 if (that.$store.state.userInfo.info.extra === null) {
                   that.isHide = true
@@ -110,20 +110,20 @@
           secret: window.sessionStorage.secret,
           that: this
         })
-        // 刷新判断是否还有余额
+        // 刷新判断是否还有余额 / Refresh to determine if there are balances
         if (this.$store.state.userInfo.info.balances.length === 0) {
           this.isEmpty = false
         } else {
           this.isEmpty = true
         }
-        this.$store.commit('callToast', {msgHeader: '成功！', msgContent: '刷新成功(不推荐使用F5)', _confirmfunc: '我看见了', _cancelfunc: '关闭', deals: undefined, contract: 4})
+        this.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('REFRESH_SUCCESSFUL_MSG'), _confirmfunc: this.$t('I_SAW'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
         // window.history.go(0)
       }
     },
     computed: {
       accountName: function () {
         if (this.$store.state.userInfo.info.extra === null) {
-          return '个人信息未设置'
+          return this.$t('PERSONAL_INFORMATION_NOT_SET_MSG')
         } else {
           return this.$store.state.userInfo.info.extra.str1
         }
@@ -137,12 +137,12 @@
       this.account = this.$store.state.userInfo.info.balances
       this.address = this.$store.state.userInfo.info.address
       if (this.account.length === 0) {
-        this.accountInfo = '未查询到您账户下的余额信息！可能是新建用户或者输入密钥有误'
+        this.accountInfo = this.$t('NO_BALANCE_INFORMATION')
         this.isEmpty = true
       } else {
         this.isEmpty = false
       }
-      // 判断是否要显示名称修改
+      // 判断是否要显示名称修改 / Determine whether to display the name modification
       if (this.$store.state.userInfo.info.extra === null) {
         this.isHide = false
       } else {

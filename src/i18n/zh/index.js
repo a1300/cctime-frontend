@@ -152,7 +152,24 @@ const lang = {
   REPORT_THIS_COMMENT_QM: '是否对该评论进行举报？',
   THE_INPUT_CAN_NOT_BE_EMPTY: '输入的内容不能为空呦',
   REPLY_TO_COMMENT_WAS_SUCCESSFUL_MSG: '回复评论成功！大约十秒后看到更新',
-  REPORT_COMMENT_QM: '是否举报该评论'
+  REPORT_COMMENT_QM: '是否举报该评论',
+
+  /* account.vue */
+  IMG_ALT_TEXT: '刷新',
+  IMG_TITLE: '刷新',
+  USER_NAME: '用户名：',
+  ENTER_NICKNAME: '  输入昵称',
+  LAND: '地',
+  SITE: '址：',
+  CHARGE_WITHDRAWAL: '充/提币',
+  QUANTITY: '数量',
+  NICKNAME_NOT_EMPTY_MSG: '昵称不能为空',
+  NICKNAME_NOT_LONGER_THEN_20_BYTES: '昵称必须小于等于20个字节',
+  NICKNAME_SET_SUCCESSFUL_MSG: '修改昵称成功！(大约十秒后您的信息将被更新)',
+  REFRESH_SUCCESSFUL_MSG: '刷新成功(不推荐使用F5)',
+  I_WAS: '我看见了',
+  PERSONAL_INFORMATION_NOT_SET_MSG: '个人信息未设置',
+  NO_BALANCE_INFORMATION: '未查询到您账户下的余额信息！可能是新建用户或者输入密钥有误'
 }
 
 export default lang
