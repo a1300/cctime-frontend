@@ -111,7 +111,10 @@ const lang = {
 
   /* notfound.vue */
   PAGE_NOTFOUND: 'The page you visited disappeared apparently',
-  RETURN_TO_HOME: 'Click here to return to the homepage, thank you, that you support CCTIME!'
+  RETURN_TO_HOME: 'Click here to return to the homepage, thank you, that you support CCTIME!',
+
+  /* newpost.vue */
+  LOG_UPDATED_ONCE: '更新了一次'
 
 }
 

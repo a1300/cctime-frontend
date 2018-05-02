@@ -1,5 +1,5 @@
 <template>
-<!--此间内容摘鉴自热门页-->
+<!--此间内容摘鉴自热门页 / This content is from the popular page-->
   <div class="main-wrap" @click="showall">
     <ul>
       <new-list v-for="(item, index) in this.switchGroup.articles" :key="index" :item="item" :that="this" :index="realIndex + index + 1" v-on:reFresh="toReFresh"></new-list>
@@ -23,7 +23,7 @@
     },
     data: function () {
       return {
-        // 分页初始量
+        // 分页初始量 / Paging initial amount
         awardNum: undefined,
         pageSpots: 5,
         pageContent: 20,
@@ -36,12 +36,12 @@
       showall: function () {
         console.log(this.currentPage)
       },
-      // 跳到顶部
+      // 跳到顶部 / Jump to the top
       jumpToTop: function () {
         let pos = document.querySelector('.main-wrap')
         document.body.scrollTop = pos.offsetTop - 100
       },
-      // 刷新（重新拉取）事件
+      // 刷新（重新拉取）事件 / Refresh (re-pull) the event
       toReFresh: function (start) {
         let that = this
         setTimeout(function () {
@@ -53,7 +53,7 @@
           })
         }, 10000)
       },
-      // 操作页面增减
+      // 操作页面增减 / Operation page increase or decrease
       addPage: function () {
         if (this.currentPage < this.allPage - 1) {
           this.$store.commit('toAddCurrentPage')
@@ -83,7 +83,7 @@
           return
         }
       },
-      // 页面跳转
+      // 页面跳转 / page jump
       goto: function (index) {
         if (index === this.currentPage) return
         this.$store.commit('toPlusCurrentPage', index)
@@ -100,12 +100,12 @@
     computed: {
       ...mapGetters(['newArticleList']),
       ...mapState(['articleNewList', 'currentPage']),
-      // 以下是分页内容
-      // 分页数组
+      // 以下是分页内容 / The following is the page content
+      // 分页数组 / 分页数组
       switchGroup: function () {
         return this.$store.getters['newArticleList']
       },
-      // 构造页签数组
+      // 构造页签数组 / Constructing an array of tabs
       page: function () {
         let pag = []
         if (this.currentPage < this.pageSpots) {
@@ -125,11 +125,11 @@
         }
         return pag
       },
-      // 页签总数
+      // 页签总数 / Total number of tabs
       allPage: function () {
         return Math.ceil(Number(this.switchGroup.count) / this.pageContent)
       },
-      // 返回偏移量
+      // 返回偏移量 / Return offset
       offsetNum: function () {
         return this.currentPage * this.pageContent
       },
@@ -139,9 +139,9 @@
     },
     created: function () {
       let that = this
-      // 定义轮询方法
+      // 定义轮询方法 / Defining polling methods
       let func = function () {
-        console.log('更新了一次')
+        console.log(this.$t('LOG_UPDATED_ONCE'))
         that.$store.dispatch('getAllarticles', {
           sortBy: 'timestamp',
           limit: String(that.pageContent),
@@ -150,8 +150,8 @@
         })
       }
       console.log('created!!')
-      // 以下是触发Action内容
-      // 输出$state list内容
+      // 以下是触发Action内容 / The following is the trigger Action content
+      // 输出$state list内容 / Output $state list content
       this.$store.dispatch('getAllarticles', {
         sortBy: 'timestamp',
         limit: String(this.pageContent),

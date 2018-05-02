@@ -112,7 +112,10 @@ const lang = {
 
   /* notfound.vue */
   PAGE_NOTFOUND: '您访问的页面由于各种原因，总之消失了',
-  RETURN_TO_HOME: '点击这里返回主页，感谢您对CCTime的大力支持！'
+  RETURN_TO_HOME: '点击这里返回主页，感谢您对CCTime的大力支持！',
+
+  /* newpost.vue */
+  LOG_UPDATED_ONCE: '更新了一次'
 }
 
 export default lang
