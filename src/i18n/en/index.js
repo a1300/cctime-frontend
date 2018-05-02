@@ -125,7 +125,12 @@ const lang = {
   ENTER_KEY: '  Please enter the key',
   NO_ACCOUNT_QESTION: 'Do not have a account?',
   KEY_CANNOT_BE_EMPTY: 'Key can not be empty',
-  KEY_DOES_NOT_MEET_RULES: '秘钥不符合规则'
+  KEY_DOES_NOT_MEET_RULES: '秘钥不符合规则',
+
+  /* footbar.vue */
+  ASCH_OFFICIAL_WEBSITE: 'Asch Website',
+  ASCH_OFFICIAL_FORUM: 'Asch Forum',
+  ASCH_OFFICIAL_QQ_GROUP: 'Official QQ Group: {num}'
 
 }
 

@@ -126,7 +126,12 @@ const lang = {
   ENTER_KEY: '  请输入密钥',
   NO_ACCOUNT_QESTION: '尚未拥有账户？',
   KEY_CANNOT_BE_EMPTY: '秘钥不能为空呦',
-  KEY_DOES_NOT_MEET_RULES: '秘钥不符合规则'
+  KEY_DOES_NOT_MEET_RULES: '秘钥不符合规则',
+
+  /* footbar.vue */
+  ASCH_OFFICIAL_WEBSITE: '阿希官网',
+  ASCH_OFFICIAL_FORUM: '阿希论坛',
+  ASCH_OFFICIAL_QQ_GROUP: '官方QQ群：{num}'
 
 }
 

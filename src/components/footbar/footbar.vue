@@ -1,10 +1,10 @@
 <template>
   <div class="footbar">
     <div class="link_box">
-      <a href="https://www.asch.io" target="_blank">阿希官网</a>&nbsp;|
-      <a href="http://bbs.asch.io" target="_blank">阿希论坛</a>&nbsp;|
-      <p>官方QQ群：485979564</p>&nbsp;|
-      <p>官方QQ群：545183438</p>
+      <a href="https://www.asch.io" target="_blank">{{$t('ASCH_OFFICIAL_WEBSITE')}}</a>&nbsp;|
+      <a href="http://bbs.asch.io" target="_blank">{{$t('ASCH_OFFICIAL_FORUM')}}</a>&nbsp;|
+      <p>{{$t('ASCH_OFFICIAL_QQ_GROUP', { num: '485979564' })}}</p>&nbsp;|
+      <p>{{$t('ASCH_OFFICIAL_QQ_GROUP', { num: '545183438' })}}</p>
     </div>
     <span>&copy;Asch</span>
   </div>
