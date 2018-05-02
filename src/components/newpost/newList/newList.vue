@@ -2,7 +2,7 @@
   <li class="root_list">
       <div class="count_wrapper">
         <span class="readcount">
-          <!--阅读计数器-->
+          <!--阅读计数器 / Reading counter-->
           {{index}}
         </span>
       </div>
@@ -24,15 +24,15 @@
         </span>
         <span class="comment meta_info">
             <img src="/static/img/comments.png">
-            <router-link :to="'articles/'+item.id">{{item.comments}} 评论</router-link>
+            <router-link :to="'articles/'+item.id">{{item.comments}} {{$t('COMMENT')}}</router-link>
         </span>
         <span class="vote meta_info" @click="voteBtn">
             <img src="/static/img/up.png">
-            {{item.votes}}票
+            {{item.votes}}{{$t('TICKET')}}
         </span>
         </span>
     </div>
-    <div class="reportIn" @click="reportBtn" v-if="this.$store.state.userInfo.info.isDelegate === true">举报该文章</div>
+    <div class="reportIn" @click="reportBtn" v-if="this.$store.state.userInfo.info.isDelegate === true">{{$t('REPORT_ARTICLE')}}</div>
   </li>
 </template>
 
@@ -50,42 +50,42 @@ export default {
     toggleAward: function (item) {
       this.deToggle = !this.deToggle
     },
-    // 组织打赏arg
+    // 组织打赏arg / The organization enjoys arg
     pushAward: function (id, amount) {
       let arr = []
       arr.push(id)
       arr.push(amount)
       return arr
     },
-    // 文章打赏
+    // 文章打赏 / Article reward
     voteBtn: function () {
       let that = this
       if (that.$store.state.isLogin === false) {
-        that.$store.commit('callToast', {msgHeader: '注意!', msgContent: '仅当您登录后才能使用打赏功能', _confirmfunc: '去登录', _cancelfunc: '不了', deals: undefined, contract: 3})
+        that.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('CAN_REWARD_FEATURE_ONLY_WHEN_LOGGED_IN'), _confirmfunc: this.$t('GO_TO_LOGIN'), _cancelfunc: this.$t('CAN_NOT'), deals: undefined, contract: 3})
         return
       }
-      this.$store.commit('callInputToast', {msgHeader: '打赏', msgContent: '请输入打赏票数', _confirmfunc: null, _cancelfunc: null, deals: that.item.id, contract: 2})
-      // 无反馈强制刷新
+      this.$store.commit('callInputToast', {msgHeader: this.$t('REWARD'), msgContent: this.$t('ENTER_NUMBER_OF_TICKETS'), _confirmfunc: null, _cancelfunc: null, deals: that.item.id, contract: 2})
+      // 无反馈强制刷新 / No feedback forced refresh
       setTimeout(function () {
         that.$emit('reFresh')
       }, 20000)
     },
-    // 举报文章
+    // 举报文章 / Report article
     reportBtn: function () {
       let that = this
       if (that.$store.state.isLogin === false) {
-        that.$store.commit('callToast', {msgHeader: '注意!', msgContent: '仅当您登录后才能使用举报功能', _confirmfunc: '去登录', _cancelfunc: '不了', deals: undefined, contract: 3})
+        that.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('REPORT_ARTICLE_ONLY_WHEN_LOGGED_IN'), _confirmfunc: this.$t('GO_TO_LOGIN'), _cancelfunc: this.$t('CAN_NOT'), deals: undefined, contract: 3})
         return
       }
-      this.$store.commit('callToast', {msgHeader: '警告', msgContent: '是否对该文章进行举报？', _confirmfunc: '举报', _cancelfunc: '不了', deals: that.item.id, contract: 2})
+      this.$store.commit('callToast', {msgHeader: this.$t('CAVEAT'), msgContent: this.$t('IS_THIS_ARTICLE_REPORTED'), _confirmfunc: this.$t('REPORT'), _cancelfunc: this.$t('CAN_NOT'), deals: that.item.id, contract: 2})
     }
   },
   computed: {
-    // 处理url显示
+    // 处理url显示 / Process url display
     getUrl: function () {
       return this.item.url.split('/')[2]
     },
-    // 当即时间
+    // 当即时间 / Immediate time
     realT: function () {
       let pst = ''
       let t = Number(this.item.realTime)
@@ -97,27 +97,27 @@ export default {
       let day = 0
       let yea = 0
       if (sec < 60 && sec >= 0) {
-        pst = Math.floor(sec) + '秒前'
+        pst = Math.floor(sec) + this.$t('SECONDS_AGO')
       } else if (sec >= 60) {
         min = Math.floor(sec / 60)
         if (min < 60) {
-          pst = Math.floor(min) + '分钟前'
+          pst = Math.floor(min) + this.$t('MINUTES_AGO')
         } else {
           hor = Math.floor(min / 60)
           if (hor < 24) {
-            pst = hor + '小时前'
+            pst = hor + this.$t('HOURS_AGO')
           } else {
             day = Math.floor(hor / 24)
             if (day < 360) {
-              pst = day + '天前'
+              pst = day + this.$t('DAYS_AGO')
             } else {
               yea = Math.floor(day / 360)
-              pst = yea + '年前'
+              pst = yea + this.$t('YEARS_AGO')
             }
           }
         }
       } else {
-        pst = '刚刚'
+        pst = this.$t('JUST')
       }
       return pst
     }

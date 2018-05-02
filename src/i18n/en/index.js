@@ -116,6 +116,10 @@ const lang = {
   /* newpost.vue */
   LOG_UPDATED_ONCE: '更新了一次'
 
+  /* newList.vue
+     no translations
+  */
+
 }
 
 export default lang
