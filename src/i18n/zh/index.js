@@ -131,7 +131,18 @@ const lang = {
   /* footbar.vue */
   ASCH_OFFICIAL_WEBSITE: '阿希官网',
   ASCH_OFFICIAL_FORUM: '阿希论坛',
-  ASCH_OFFICIAL_QQ_GROUP: '官方QQ群：{num}'
+  ASCH_OFFICIAL_QQ_GROUP: '官方QQ群：{num}',
+
+  /* detail.vue */
+  RECEDE: '后退',
+  ENTER_COMMENT: '输入评论',
+  CLEAR: '清除',
+  POST_COMMENT: '发布评论',
+  CAN_NOT_PLAY_CCT: '你不能戏耍CCT',
+  GOT_IT: '知道了',
+  COMMENT_FEATURE_ONLY_AVAILABLE_IF_LOGGED_IN: '仅当您登录后才能使用评论功能',
+  INPUT_CAN_NOT_BE_EMPTY: '输入内容不能为空呦',
+  COMMENT_POSTED_SUCCESSFULL_MSG: '发布评论成功！大约十秒后看到更新'
 
 }
 

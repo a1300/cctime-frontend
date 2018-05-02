@@ -2,7 +2,7 @@
   <div class="article_wrapper" @click="showSS">
     <div class="main">
       <div class="head_info">
-        <a class="back_arror" @click="back" title="后退"><img src="/static/img/back.png"></a>
+        <a class="back_arror" @click="back" v-bind:title="$t('RECEDE')"><img src="/static/img/back.png"></a>
         <div class="list_container">
           <span class="title">
             <h1>{{this.articleDetail.article.title}}</h1>
@@ -37,20 +37,20 @@
         <router-link class="next" to="/articles/"+this.nextId>下一篇</router-link>
       </div> -->
     </div>
-    <!--文章评论部分-->
+    <!--文章评论部分 / Article review section-->
     <div id="article_comment">
       <div>
-        <input id="comment_input" type="text" @focus="input_change($event)" placeholder="  输入评论" v-model="commentContent">
-        <span class="comment_clear" @click="clearComment()">清除</span>
-        <span class="comment_publish" @click="subCommment()">发布评论</span>
+        <input id="comment_input" type="text" @focus="input_change($event)" v-bind:placeholder="$t('ENTER_COMMENT')" v-model="commentContent">
+        <span class="comment_clear" @click="clearComment()">{{$t('CLEAR')}}</span>
+        <span class="comment_publish" @click="subCommment()">{{$t('POST_COMMENT')}}</span>
       </div>
     </div>
-    <!-- 文章页下部 评论-->
+    <!-- 文章页下部 评论 / Article page Lower Comment-->
     <div class="comment_part">
       <ul>
         <detail-list v-for="(item, index) in this.detailCommentList.comments" :item="item" :key="item.id" :that="this" @reFresh="toRefreshAll"></detail-list>
       </ul>
-      <!--未设置逻辑-->
+      <!--未设置逻辑 / no logic set-->
       <div class="pag">
         <div class="ctrbtn" @click="minPage" v-show="this.currentPage_comment != 0">上一页</div>
         <div class="pagespot" v-for="(value, index) in this.page" @click="goto(index)" :class="{'active':currentPage_comment + 1 == Number(value)}">{{Number(value)}}</div>
@@ -77,9 +77,9 @@
         isAwardToggle: false,
         isReplyToggle: false,
         isCommentToggle: false,
-        // 分页初始量
+        // 分页初始量 / Paging initial amount
         awardNum: undefined,
-        // 引入公共state
+        // 引入公共state / Introduce public state
         // currentPage: 0,
         pageSpots: 5,
         pageContent: 6,
@@ -89,7 +89,7 @@
     computed: {
       ...mapGetters(['detailCommentList']),
       ...mapState(['articleDetail', 'articleCommentList', 'currentPage_comment']),
-      // 处理文章格式
+      // 处理文章格式 / Processing article format
       formlizedArticle: function () {
         let article = String(this.articleDetail.article.text)
         article.replace(/[\r\n]]/g, '123123')
@@ -97,13 +97,13 @@
         article = article + '</p>'
         return 1
       },
-      // 处理url显示
+      // 处理url显示 / Process url display
       getUrl: function () {
         console.log('1SP')
         console.log(this.articleDetail.article)
         return this.articleDetail.article.url.split('/')[2]
       },
-      // 构造页签数组
+      // 构造页签数组 / Constructing an array of tabs
       page: function () {
         let pag = []
         if (this.currentPage_comment < this.pageSpots) {
@@ -123,32 +123,32 @@
         }
         return pag
       },
-      // 页签总数
+      // 页签总数 / Total number of tabs
       allPage: function () {
         return Math.ceil(Number(this.detailCommentList.count) / this.pageContent)
       },
-      // 返回偏移量
+      // 返回偏移量 / Return offset
       offsetNum: function () {
         return this.currentPage_comment * this.pageContent
       },
       realIndex: function () {
         return this.currentPage_comment * this.pageContent
       },
-      // 获取当前文章ID
+      // 获取当前文章ID / Get current article ID
       getId: function () {
         console.log('2SP')
         return this.$route.params.id
         // return window.location.hash.split('/')[2]
       },
-      // 上一篇文章id
+      // 上一篇文章id / Previous article id
       preId: function () {
         return Number(this.getId) - 1
       },
-      // 下一篇文章id
+      // 下一篇文章id / Next article id
       nextId: function () {
         return Number(this.getId) + 1
       },
-      // 组织评论状态表
+      // 组织评论状态表 / Organization Review Status Form
       commentStatus: function () {
         let isCselected = []
         for (var i = 0; i <= this.articleCommentList.comments.length - 1; i++) {
@@ -161,7 +161,7 @@
       yield: function () {
         return this.articleDetail.article.votes * 0.0001
       },
-      // 尝试解析text
+      // 尝试解析text / Try to parse text
       textContent: function () {
         let txt = this.articleDetail.article.text
         console.log(txt, '______________________________________')
@@ -179,22 +179,22 @@
         let day = 0
         let yea = 0
         if (sec < 60) {
-          pst = Math.floor(sec) + '秒前'
+          pst = Math.floor(sec) + this.$t('SECONDS_AGO')
         } else {
           min = Math.floor(sec / 60)
           if (min < 60) {
-            pst = Math.floor(min) + '分钟前'
+            pst = Math.floor(min) + this.$t('MINUTES_AGO')
           } else {
             hor = Math.floor(min / 60)
             if (hor < 24) {
-              pst = hor + '小时前'
+              pst = hor + this.$t('HOURS_AGO')
             } else {
               day = Math.floor(hor / 24)
               if (day < 360) {
-                pst = day + '天前'
+                pst = day + this.$t('DAYS_AGO')
               } else {
                 yea = Math.floor(day / 360)
-                pst = yea + '年前'
+                pst = yea + this.$t('YEARS_AGO')
               }
             }
           }
@@ -203,11 +203,11 @@
       }
     },
     methods: {
-      // 测试用
+      // 测试用 / for testing
       showSS: function () {
         console.log(this.formlizedArticle)
       },
-      // 操作页面增减
+      // 操作页面增减 / Operation page increase or decrease
       addPage: function () {
         if (this.currentPage_comment < this.allPage - 1) {
           this.$store.commit('toAddCurrentPage_c')
@@ -236,7 +236,7 @@
           return
         }
       },
-      // 页面跳转
+      // 页面跳转 / page jump
       goto: function (index) {
         if (index === this.current) return
         this.$store.commit('toPlusCurrentPage_c', index)
@@ -248,12 +248,12 @@
           that: this
         })
       },
-      // 全部刷新
+      // 全部刷新 / refresh all
       toRefreshAll: function () {
         this.toReFreshA()
         this.toReFreshC()
       },
-      // 刷新（重新拉取）事件
+      // 刷新（重新拉取）事件 / Refresh (re-pull) the event
       toReFreshC: function (data) {
         let that = this
         setTimeout(function () {
@@ -275,12 +275,12 @@
           console.log(that.getId, 'toReFreshA')
         }, 10000)
       },
-      // 跳转评论
+      // 跳转评论 / Jump comment
       jumpToCom: function () {
         let pos = document.querySelector('#article_comment')
         document.body.scrollTop = pos.offsetTop - 300
       },
-      // 动画开关
+      // 动画开关 / Animation switch
       toggleAward: function () {
         this.isAwardToggle = !this.isAwardToggle
       },
@@ -290,20 +290,20 @@
         }
         this.articleCommentList.comments[index].isSelected = this.articleCommentList.comments[index].isSelected ? 'false' : 'true'
       },
-      // 调用投票  调用toastinput里的方法
+      // 调用投票  调用toastinput里的方法 / Call Voting Call method in toastinput
       voteBtn: function () {
         let that = this
         if (that.$store.state.isLogin === false) {
-          that.$store.commit('callToast', {msgHeader: '注意!', msgContent: '仅当d登录后才能使用打赏功能', _confirmfunc: '去登录', _cancelfunc: '不了', deals: undefined, contract: 3})
+          that.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('CAN_REWARD_FEATURE_ONLY_WHEN_LOGGED_IN'), _confirmfunc: this.$t('GO_TO_LOGIN'), _cancelfunc: this.$t('CAN_NOT'), deals: undefined, contract: 3})
           return
         }
         if (this.a_num === 0) {
-          that.$store.commit('callToast', {msgHeader: '注意!', msgContent: '你不能戏耍CCT', _confirmfunc: '知道了', _cancelfunc: '嗯', deals: undefined, contract: 4})
+          that.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('CAN_NOT_PLAY_CCT'), _confirmfunc: this.$t('GOT_IT'), _cancelfunc: this.$t('OK'), deals: undefined, contract: 4})
           return
         }
-        this.$store.commit('callInputToast', {msgHeader: '打赏', msgContent: '请输入打赏票数', _confirmfunc: '确认', _cancelfunc: '取消', deals: that.articleDetail.article.id, contract: 2})
+        this.$store.commit('callInputToast', {msgHeader: this.$t('REWARD'), msgContent: this.$t('ENTER_NUMBER_OF_TICKETS'), _confirmfunc: this.$t('CONFIRM'), _cancelfunc: this.$t('CANCEL'), deals: that.articleDetail.article.id, contract: 2})
       },
-      // 文章打赏
+      // 文章打赏 / article reward
       voteForA: function () {
         let that = this
         this.isAwardToggle = false
@@ -317,15 +317,15 @@
             if (err) {
               return
             }
-            this.$store.commit('callToast', {msgHeader: '成功！', msgContent: '打赏成功！大约十秒后将看到更新信息', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+            this.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('REWARD_SUCCESS_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
             that.toReFreshA()
           }
         })
 
-        // 重新初始化
+        // 重新初始化 / Reinitialize
         this.a_num = undefined
       },
-      // 评论打赏
+      // 评论打赏 / Commentary
       voteForC: function (cid) {
         let awArg = this.pushAward(cid, this.c_num)
         this.$store.dispatch('invokeContract', {
@@ -334,21 +334,21 @@
           args: awArg,
           that: this
         })
-        // 重新初始化
+        // 重新初始化 / Reinitialize
         this.c_num = undefined
       },
-      // 评论框效果增添
+      // 评论框效果增添 / Add comment box effect
       input_change: function (e) {
         e.target.value = '    '
       },
-      // 清除评论框
+      // 清除评论框 / Clear comment box
       clearComment: function () {
         this.commentContent = ''
       },
-      // 发布评论
+      // 发布评论 / Post a comment
       subCommment: function () {
         if (this.$store.state.isLogin === false) {
-          this.$store.commit('callToast', {msgHeader: '注意!', msgContent: '仅当您登录后才能使用评论功能', _confirmfunc: '去登录', _cancelfunc: '取消', deals: undefined, contract: 3})
+          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('COMMENT_FEATURE_ONLY_AVAILABLE_IF_LOGGED_IN'), _confirmfunc: this.$t('GO_TO_LOGIN'), _cancelfunc: this.$t('CANCEL'), deals: undefined, contract: 3})
           return
         }
         let reg = '^[ ]+$'
@@ -356,7 +356,7 @@
         let result = regu.test(this.commentContent)
         if (result === true || this.commentContent === '') {
           this.commentContent.test
-          this.$store.commit('callToast', {msgHeader: '注意!', msgContent: '输入内容不能为空呦', _confirmfunc: '确定', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('INPUT_CAN_NOT_BE_EMPTY'), _confirmfunc: this.$t('DETERMINE'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         let that = this
@@ -370,15 +370,15 @@
             if (err) {
               return
             }
-            that.$store.commit('callToast', {msgHeader: '成功！', msgContent: '发布评论成功！大约十秒后看到更新', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
-            // 延迟更新公共state
+            that.$store.commit('callToast', {msgHeader: this.$t('SUCCESS'), msgContent: this.$t('COMMENT_POSTED_SUCCESSFULL_MSG'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
+            // 延迟更新公共state / Delay updating public state
             that.clearComment()
             that.toReFreshA()
             that.toReFreshC()
           }
         })
       },
-      // 组织回复arg
+      // 组织回复arg / Organization reply arg
       pushInEvent: function (isReply, pid, commentCotent) {
         let arr = []
         if (isReply) {
@@ -393,7 +393,7 @@
           return arr
         }
       },
-      // 组织打赏arg
+      // 组织打赏arg The organization enjoys arg
       pushAward: function (id, amount) {
         let arr = []
         arr.push(id)
@@ -405,7 +405,7 @@
       }
     },
     beforeCreate: function () {
-      // 渲染以前的session更改
+      // 渲染以前的session更改 / Render previous session changes
       this.$store.commit('clearArticleDetail')
       console.log(window.location.href)
       console.log(this.getId, 'beforeCreate')
@@ -510,12 +510,12 @@
       })
     },
     destroyed: function () {
-      // 离开页面的数据清空
+      // 离开页面的数据清空 / Leave the page empty
       console.log('destroyed begin')
       console.log(window.location.href)
       // this.$store.commit('clearArticleDetail')
       console.log(this.$store.state.articleDetail)
-      // 清空page
+      // 清空page / Empty page
       this.$store.commit('toInitPage')
     }
   }
