@@ -3,14 +3,14 @@
     <header class="header">
       <nav class="nav-wrapper">
         <router-link to="/top" class="fl logo"></router-link>
-        <router-link to="/top" class="fl btn_hot" active-class="active"><span>{{$t('TEST')}}</span></router-link>
+        <router-link to="/top" class="fl btn_hot" active-class="active"><span>HOT</span></router-link>
         <router-link to="/new" class="fl btn_new" active-class="active"><span>NEW</span></router-link>
         <div class="right-part">
-          <router-link to="/login" class="loginbtn btn" v-show="!this.isLogin">登录</router-link>
-          <a href="http://mainnet.asch.io/#/login" target="_blank" class="loginbtn btn" v-show="!this.isLogin">注册</a>
-          <span class="logoutbtn btn" @click="logout" v-show="this.isLogin">注销</span>
-          <router-link to="/account" class="accountbtn btn" v-show="this.isLogin">我的账户</router-link>
-          <span class="submitbtn btn" @click="showPublish" v-show="this.isLogin">发布</span>
+          <router-link to="/login" class="loginbtn btn" v-show="!this.isLogin">{{$t('LOGIN')}}</router-link>
+          <a href="http://mainnet.asch.io/#/login" target="_blank" class="loginbtn btn" v-show="!this.isLogin">{{$t('REGISTER')}}</a>
+          <span class="logoutbtn btn" @click="logout" v-show="this.isLogin">{{$t('LOGOUT')}}</span>
+          <router-link to="/account" class="accountbtn btn" v-show="this.isLogin">{{$t('MY_ACCOUNT')}}</router-link>
+          <span class="submitbtn btn" @click="showPublish" v-show="this.isLogin">{{$t('PUBLISH')}}</span>
         </div>
       </nav>
     </header>
@@ -29,13 +29,20 @@
     },
     methods: {
       logout: function () {
-        this.$store.commit('callToast', {msgHeader: '注意', msgContent: '是否要进行注销？', _confirmfunc: '注销', _cancelfunc: '取消', deals: undefined, contract: 5})
+        this.$store.commit('callToast', {
+          msgHeader: this.$t('NOTE'),
+          msgContent: this.$t('CANCEL_QM'),
+          _confirmfunc: this.$t('LOGOUT'),
+          _cancelfunc: this.$t('CANCEL'),
+          deals: undefined,
+          contract: 5
+        })
       },
       showPublish: function () {
         if (this.isLogin === true) {
           this.$router.push('/publish')
         } else {
-          this.$store.commit('callToast', {msgHeader: '发生错误', msgContent: '请先登录', _confirmfunc: '去登录', _cancelfunc: '不了', deals: undefined, contract: 3})
+          this.$store.commit('callToast', {msgHeader: this.$t('ERROR_OCURRED'), msgContent: this.$t('LOG_IN_FIRST'), _confirmfunc: this.$t('GO_TO_LOGIN'), _cancelfunc: this.$t('CAN_NOT'), deals: undefined, contract: 3})
           this.$router.push('/login')
         }
       }

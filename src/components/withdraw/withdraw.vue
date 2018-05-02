@@ -1,43 +1,43 @@
 <template>
   <div class="withdraw_container">
     <div class="header">
-        <h1>站内转账</h1>
+        <h1>{{$t('TRANSFER_WITHIN_STATION')}}</h1>
     </div>
     <div class="deal_part">
-        <span>输入转账信息</span>
+        <span>{{$t('ENTER_TRANSFER_INFO')}}</span>
         <div class="deal_form">
         <select type="text" v-model="trans_type">
-          <option disabled selected>转账币种</option>
-          <option v-for="item in this.userInfo.info.balances" :value="item.currency">{{item.currency}}&nbsp;&nbsp;&nbsp;(可用余额{{item.balance/1e8}})</option>
+          <option disabled selected>{{$t('TRANSFER_CURRENCY')}}</option>
+          <option v-for="item in this.userInfo.info.balances" :value="item.currency">{{item.currency}}&nbsp;&nbsp;&nbsp;({{$t('AVAILABLE_BALANCE')}}{{item.balance/1e8}})</option>
         </select>
           <input style="display:none" type="text" name="fakeusernameremembered"/>
           <input style="display:none" type="password" name="fakepasswordremembered"/>
-          <input type="number" placeholder="转账数量" v-model="trans_num" min="0">
-          <input type="text" placeholder="转账地址" v-model="trans_address">
-          <input type="text" class="calculate" placeholder="手续费0.1" disabled>
+          <input type="number" v-bind:placeholder="$t('TRANSFERS')" v-model="trans_num" min="0">
+          <input type="text" v-bind:placeholder="$t('TRANSFER_ADDRESS')" v-model="trans_address">
+          <input type="text" class="calculate" v-bind:placeholder="$t('FEES', { fee: 0.1 })" disabled>
           <!-- <input type="password" class="psd" v-model="trans_password" autocomplete="off" placeholder="请输入二级密码，如果未设置请略过"> -->
         </div>
     </div>
-    <p>请确保您所填的对方地址是否正确，本操作无法撤销</p>
+    <p>{{$t('MAKE_SURE_ADDRESS_IS_CORRECT')}}</p>
     <div class="confirm_btn">
-      <span class="btn" @click="toWithdraw">确认转账</span>
+      <span class="btn" @click="toWithdraw">{{$t('CONFIRM_TRANSFER')}}</span>
     </div>
     <div class="record_title">
-      <h3>转账记录</h3>
+      <h3>{{$t('TRANSFER_RECORD')}}</h3>
       <select type="text" v-model="trans_query_type" @change="toQuery">
-        <option disabled selected>币种筛选</option>
+        <option disabled selected>{{$t('CURRENCY_SCREENING')}}</option>
         <option v-for="item in this.userInfo.info.balances">{{item.currency}}</option>
       </select>
     </div>
     <div class="record">
       <table>
         <tr class="table_header">
-          <th>记录ID</th>
-          <th>转出方</th>
-          <th>转入方</th>
-          <th>转移数量</th>
-          <th>发送时间</th>
-          <th>币种</th>
+          <th>{{$t('RECORD_ID')}}</th>
+          <th>{{$t('SENDER')}}</th>
+          <th>{{$t('RECEIVER')}}</th>
+          <th>{{$t('TRANSFER_AMOUNT')}}</th>
+          <th>{{$t('SENDING_TIME')}}</th>
+          <th>{{$t('CURRENCY')}}</th>
         </tr>
         <tr v-for="(item, index) in this.switchGroup">
           <td>{{index + 1}}</td>
@@ -71,21 +71,21 @@
         trans_address: '',
         trans_password: '',
         trans_query_type: '',
-        // 分页初始量 引入公共state
+        // 分页初始量 引入公共state / Paginated initial amount to introduce common state
         // currentPage: 0,
         pageSpots: 5,
         pageContent: 5,
         pageNum: 0,
-        // 转账阀门
+        // 转账阀门 / Transfer value
         isDealed: false
       }
     },
     methods: {
-      // 转账
+      // 转账 / transfer
       toWithdraw: function () {
-        // 阀门检测
+        // 阀门检测 / Valve inspection
         if (this.isDealed === true) {
-          this.$store.commit('callToast', {msgHeader: '注意！', msgContent: '上一次交易尚未完成，请稍后', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('TRANSACTION_NOT_COMPLETED'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         // 整数检测
@@ -95,23 +95,23 @@
         //   return
         // }
         if (this.trans_type === '') {
-          this.$store.commit('callToast', {msgHeader: '注意！', msgContent: '请先选择交易内容！', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: this.$t('SELECT_TRANSACTION_TYPE_FIRST'), _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         if (this.trans_address === '') {
-          this.$store.commit('callToast', {msgHeader: '注意！', msgContent: '请先选择交易对象地址！', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: '请先选择交易对象地址！', _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         if (this.trans_address.indexOf(' ') !== -1) {
-          this.$store.commit('callToast', {msgHeader: '注意！', msgContent: '交易地址不得有空格/回车', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: '交易地址不得有空格/回车', _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         if (this.trans_num <= 0) {
-          this.$store.commit('callToast', {msgHeader: '注意！', msgContent: '请确认交易数额大于零！', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: '请确认交易数额大于零！', _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         if (!aschJS.crypto.isAddress(this.trans_address)) {
-          this.$store.commit('callToast', {msgHeader: '注意！', msgContent: '您输入的地址不符合阿希规范', _confirmfunc: '了解', _cancelfunc: '关闭', deals: undefined, contract: 4})
+          this.$store.commit('callToast', {msgHeader: this.$t('NOTE'), msgContent: '您输入的地址不符合阿希规范', _confirmfunc: this.$t('OK'), _cancelfunc: this.$t('SHUTDOWN'), deals: undefined, contract: 4})
           return
         }
         // 组织args
