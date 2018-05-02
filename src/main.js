@@ -7,8 +7,6 @@ import axios from 'axios'
 import store from './vuex/store'
 import i18n from './i18n/i18n'
 
-console.log(i18n)
-
 Vue.config.productionTip = false
 
 // 注册axios为原型

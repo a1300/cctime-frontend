@@ -1,5 +1,5 @@
 const lang = {
-  lang: 'en-us',
+  lang: 'en',
   TEST: 'HELLO',
 
   /* topbar.vue */
@@ -107,7 +107,11 @@ const lang = {
   BOTH_ARTICLE_AND_URL_CAN_NOT_BE_EMPTY: 'The article and URL can not be both be empty.',
   ARTICLE_POSTED_SUCCESS_MSG: 'Article posted successfully. In about 10 seconds you will see the update',
   URL_NOT_CORRECT_MSG: 'Please confirm whether the entered website is correct.',
-  LOG_JUDGING_SUCCESS: 'judging success'
+  LOG_JUDGING_SUCCESS: 'judging success',
+
+  /* notfound.vue */
+  PAGE_NOTFOUND: 'The page you visited disappeared apparently',
+  RETURN_TO_HOME: 'Click here to return to the homepage, thank you, that you support CCTIME!'
 
 }
 

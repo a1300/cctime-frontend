@@ -108,7 +108,11 @@ const lang = {
   BOTH_ARTICLE_AND_URL_CAN_NOT_BE_EMPTY: '网络地址与文章内容至少要填一项',
   ARTICLE_POSTED_SUCCESS_MSG: '发布文章成功！大约十秒后看到更新',
   URL_NOT_CORRECT_MSG: '请确认是否输入正确的网址，推荐直接复制',
-  LOG_JUDGING_SUCCESS: '判断成功'
+  LOG_JUDGING_SUCCESS: '判断成功',
+
+  /* notfound.vue */
+  PAGE_NOTFOUND: '您访问的页面由于各种原因，总之消失了',
+  RETURN_TO_HOME: '点击这里返回主页，感谢您对CCTime的大力支持！'
 }
 
 export default lang
